@@ -5,7 +5,8 @@ class DataStorage:
         self.data = data
         self.file_name = file_name
 
-    def to_csv(self):
+    def save_data(self):
         with open(self.file_name, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerows(self.data)
+            for row in self.data:
+                writer.writerow(row)
