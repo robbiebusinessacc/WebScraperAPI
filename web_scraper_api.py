@@ -1,7 +1,7 @@
 from flask import Flask, request
-from template_web_scraper.scraper import scrape
-from template_web_scraper.parser import parse
-from template_web_scraper.data_storage import save
+from WebScraperAPI.scraper import Scraper
+from WebScraperAPI.parser import Parser
+from WebScraperAPI.data_storage import DataStorage
 
 app = Flask(__name__)
 
@@ -12,15 +12,22 @@ def scrape_website():
         return "Error: No URL provided. Please specify a URL to scrape."
 
     # Scrape website
-    data = scrape(url)
-    
-    # parse the data
-    parsed_data = parse(data)
-    
-    # save the data
-    save(parsed_data)
-    
-    return "Scraped data from {}".format(url)
+    scraper_obj = Scraper(url)
+    data = scraper_obj.get_html()
+
+    if data:
+        # Parse the data
+        parser_obj = Parser(data)
+        parsed_data = parser_obj.parse_data()
+        
+        # Save the data
+        file_name = 'example_output.csv'
+        data_storage_obj = DataStorage(parsed_data, file_name)
+        data_storage_obj.save_data()
+        
+        return "Scraped data from {}".format(url)
+    else:
+        return "An error occurred while scraping the website"
 
 if __name__ == '__main__':
     app.run(debug=True)
