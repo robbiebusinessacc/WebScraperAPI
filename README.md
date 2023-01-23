@@ -23,7 +23,9 @@ save(parsed_data)
 ```
 
 ## Dependencies
+
 beautifulsoup4
+
 requests
 
 ## Contributing
