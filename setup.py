@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="web_scraper_api",
+    name="WebScraperAPI",
     version="1.0.0",
     author="Robbie Walmsley",
     author_email="robbiebusinessacc@gmail.com",
