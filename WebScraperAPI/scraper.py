@@ -1,57 +1,16 @@
-from selenium import webdriver
+import requests
 
 class Scraper:
     def __init__(self, url):
         self.url = url
+        self.proxy = 'http://proxy_address:proxy_port'
+        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'}
 
     def get_html(self):
         try:
-            options = webdriver.ChromeOptions()
-            options.add_argument("--disable-extensions")
-            options.add_argument("--disable-gpu")
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("--remote-debugging-port=9222")
-            options.add_argument("--disable-setuid-sandbox")
-            options.add_argument("--disable-infobars")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("start-maximized")
-            options.add_argument("disable-infobars")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("--disable-browser-side-navigation")
-            options.add_argument("--disable-gpu")
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-setuid-sandbox")
-            options.add_argument("--disable-extensions")
-            options.add_argument("--remote-debugging-port=9222")
-            options.add_argument("--disable-setuid-sandbox")
-            options.add_argument("--disable-infobars")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("start-maximized")
-            options.add_argument("disable-infobars")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("--disable-browser-side-navigation")
-            options.add_argument("--disable-gpu")
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-setuid-sandbox")
-            options.add_argument("--disable-extensions")
-            options.add_argument("--remote-debugging-port=9222")
-            options.add_argument("--disable-setuid-sandbox")
-            options.add_argument("--disable-infobars")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("start-maximized")
-            options.add_argument("disable-infobars")
-            options.add_argument("--disable-dev-shm-usage")
-            options.add_argument("--disable-browser-side-navigation")
-            options.add_argument("--disable-gpu")
-            options.add_argument("--no-sandbox")
-            options.add_argument("--disable-setuid-sandbox")
-            options.add_argument("--disable-extensions")
-            browser = webdriver.Chrome("path_to_chromedriver.exe", chrome_options=options)
-            browser.get(self.url)
-            html = browser.page_source
-            browser.close()
-            return html
-        except Exception as e:
+            response = requests.get(self.url, proxies={'http': self.proxy, 'https': self.proxy}, headers=self.headers)
+            response.raise_for_status()
+            return response.text
+        except requests.exceptions.RequestException as e:
             print(e)
             return None
