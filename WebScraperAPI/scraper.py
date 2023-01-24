@@ -6,9 +6,13 @@ class Scraper:
 
     def get_html(self):
         try:
-            response = requests.get(f'http://localhost:5000/scrape?url={self.url}')
+            proxies = {
+                'http': 'http://10.10.1.10:3128',
+                'https': 'http://10.10.1.10:1080',
+            }
+            response = requests.get(self.url, proxies=proxies)
             response.raise_for_status()
-            return response.json()
+            return response.text
         except requests.exceptions.RequestException as e:
             print(e)
             return None
