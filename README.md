@@ -13,27 +13,17 @@ To install the package, use pip:
 You can use the package by importing it in your code and using the `scrape` function.
 
 ```python
-from WebScraperAPI.scraper import Scraper
-from WebScraperAPI.parser import Parser
-from WebScraperAPI.data_storage import DataStorage
 
-url = 'https://example.com'
+from WebScraperAPI.WebScraperAPI import WebScraperAPI
 
-# Scrape the data from the website
-scraper_obj = Scraper(url)
-data = scraper_obj.get_html()
+# Create an instance of the class
+scraper = WebScraperAPI(file_name='COVID.csv')
 
-if data:
-    # Parse the data
-    parser_obj = Parser(data)
-    parsed_data = parser_obj.parse_data()
+# URL
+url = 'https://www.worldometers.info/coronavirus/'
 
-    # Save the data to a CSV file
-    file_name = 'example_output.csv'
-    data_storage_obj = DataStorage(parsed_data, file_name)
-    data_storage_obj.save_data()
-else:
-    print("An error occurred while scraping the website")
+# Call the scrape_website method
+result = scraper.scrape_website(url)
 ```
 
 ## Dependencies
