@@ -1,3 +1,6 @@
+from WebScraperAPI.scraper import Scraper
+from WebScraperAPI.parser import Parser
+from WebScraperAPI.data_storage import DataStorage
 class WebScraperAPI:
     def __init__(self, file_name='example_output.csv'):
         self.file_name = file_name
