@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="WebScraperAPI",
-    version="1.0.1",
+    version="1.0.4",
     author="Robbie Walmsley",
     author_email="robbiebusinessacc@gmail.com",
     description="A web scraping API that allows users to easily extract data from any website by simply providing the URL. The API utilizes advanced parsing and data storage techniques to ensure accurate and efficient data extraction. The package is easy to install and use, making it perfect for data scientists, researchers, and developers looking to quickly and easily access web data.",
